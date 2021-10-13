@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kitten-deployment
+  labels:
+    app: kitten
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kitten
+  template:
+    metadata:
+      labels:
+        app: kitten
+    spec:
+      containers:
+      - name: kittens
+        image: iva1nn/kitten-store:latest
+        imagePullPolicy: Always
+        args: ["/bin/sh"]
+        ports:
+        - containerPort: 3000

@@ -1,0 +1,3 @@
+CREATE USER kitten;
+CREATE DATABASE kitten_store;
+GRANT ALL PRIVILEGES ON DATABASE kitten_store TO kitten;
