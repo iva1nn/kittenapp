@@ -2,26 +2,21 @@ version: "3.3"
 services:
   db:
     image: postgres
-    environment:    
+    container_name: pg-db
+    environment:
+      - POSTGRES_USER=root
       - POSTGRES_PASSWORD=password
+      - APP_DB_USER=kitten
+      - APP_DB_PASS=qwerty123
+      - APP_DB_NAME=kitten_store
     volumes:
-      - ./tmp/db:/var/lib/postgresql/data
-    ports:
-      - "5432:5432"
+      - ./db:/docker-entrypoint-initdb.d/
   web:
-    image: kittens-store:lts
-    build: .
-    command: 
-      bash -c "rm -f tmp/pids/server.pid &&
-      bundle exec rake db:create &&
-      bundle exec rake db:migrate &&
-      bundle exec rake db:seed &&
-      bundle exec rackup --port 3000 --host '0.0.0.0'"
-    volumes:
-      - .:/kittens
+    image: iva1nn/ruby-app:latest
+    container_name: ruby-app
+    command:
+      - bash -c ./entrypoint.sh
     ports:
       - "3000:3000"
     depends_on:
       - db
-    environment:
-      - DATABASE_URL=postgres://postgres:password@db:5432/kitten_store

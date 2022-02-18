@@ -1,2 +1,7 @@
+.dockerignore
 .git/
+.idea/
+Dockerfile
+docker-compose*
 tmp/
+yamls/
