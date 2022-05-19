@@ -3,12 +3,8 @@ services:
   db:
     image: postgres
     container_name: pg-db
-    environment:
-      - POSTGRES_USER=root
-      - POSTGRES_PASSWORD=password
-      - APP_DB_USER=kitten
-      - APP_DB_PASS=qwerty123
-      - APP_DB_NAME=kitten_store
+    env_file:
+      - .config/.env
     volumes:
       - ./db:/docker-entrypoint-initdb.d/
   web:
