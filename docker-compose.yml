@@ -4,11 +4,8 @@ services:
     image: postgres
     container_name: pg-db
     env_file:
-<<<<<<< HEAD
       - ./config/.env
-=======
       - config/.env
->>>>>>> f2fc3d0351bf72606a62b3aeaaf4ef1e5314dd29
     volumes:
       - ./scripts:/docker-entrypoint-initdb.d/
   web:
